@@ -9,23 +9,68 @@ def readTrainingData():
         reader = csv.reader(csvfile) # change contents to floats
         for row in reader: # each row is a list
             results.append(row)
-
+            
     return results
 
-def decodeTrainingData(result):
-    
+def encodeTrainingData(training):	
+	# data[0] = suhu, data[1] = waktu, data[2] = langit, data[3] = kelembapan, data[4] = terbang
+	dataTrain = []
+	for data in training:	
+		suhu,waktu,langit,lembap,status = "","","","",""
+		if (data[0] == "Rendah"):
+			suhu = "001"		
+		elif (data[0] == "Normal"):		
+			suhu = "010"		
+		elif (data[0] == "Tinggi"):		
+			suhu = "100"
 
-def createChromosome(N):
-    pass
+		if (data[1] == "Pagi"):
+			waktu = "1000"		
+		elif (data[1] == "Siang"):		
+			waktu = "0100"		
+		elif (data[1] == "Sore"):		
+			waktu = "0010"	
+		elif (data[1] == "Malam"):		
+			waktu = "0001"
+
+		if (data[2] == "Berawan"):
+			langit = "1000"		
+		elif (data[2] == "Cerah"):		
+			langit = "0100"		
+		elif (data[2] == "Hujan"):		
+			langit = "0010"	
+		elif (data[2] == "Rintik"):		
+			langit = "0001"
+
+		if (data[3] == "Rendah"):
+			lembap = "001"		
+		elif (data[3] == "Normal"):		
+			lembap = "010"		
+		elif (data[3] == "Tinggi"):		
+			lembap = "100"
+
+		if data[4] == "Ya":
+			terbang = "1"
+		else:
+			terbang = "0"
+
+		genTraining = suhu+waktu+langit+lembap+terbang
+		dataTrain.append(genTraining)
+
+	del dataTrain[0]
+	return dataTrain
 
 
-readTrainingData()
+def createChromosome():
+	
+
+
+encodeTrainingData(readTrainingData())
 # def createPopulation(maxGen,N):
 # 	population = []
 # 	for i in range(1,N+1):
 # 		population.append(createChromosome(maxGen))
 # 	return population
-
 # def decodeChromosome(rb,ra,gen,min,max):
 # 	pembilang = (ra-rb)
 # 	penyebut1 = 0
