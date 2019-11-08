@@ -51,25 +51,45 @@ def splitRule(arrKromosom):
         yield arrKromosom[i:i+5]
 
 def cekFitness(population):
-	dataUji = readTrainingData()
-	listFitness = [] 
+	dataUji = readTrainingData() 
 	fit = 0
-	for i in range(0,10):
-		print(population[i])
+	for i in range(0,len(population)):
 		rule = list(splitRule(population[i]))
 		for dataValid in rule:
 			for data in dataUji:
-				if len(data)== len(dataValid) and len(data) == sum([1 for i, j in zip(data, dataValid) if i == j]): 
-					print(data," == ",dataValid)
+				if len(data)== len(dataValid) and len(data) == sum([1 for k, l in zip(data, dataValid) if k == l]): 
 					fit+=1
 				else: 
 					pass
-		break
-	print(fit)
-	print((fit/80)*0.01)
+		listFitness.append((fit/80)*0.01)
+		fit = 0
+
+	return listFitness
+
+def rouletteWheels(Fitness):
+	sumFitness = sum(Fitness)
+	print(sumFitness)
+	countFitness = 0
+	randomNumber = random.random()
+
+	idx = 0
+	for i in population:
+		countFitness += Fitness[idx]
+		if countFitness/sumFitness > randomNumber:
+			return i,listFitness[idx]
+			break
+		idx+=1
 
 
-cekFitness(createPopulation(10))
+listFitness = []
+population = createPopulation(10)
+x = cekFitness(population)
+idx = 0
+for i in population:
+	print(i," = ",x[idx])
+	idx+=1
+
+print(rouletteWheels(listFitness))
 # print(createPopulation(10))
 # splitRule()
 # def encodeTrainingData(training):	
@@ -140,24 +160,6 @@ cekFitness(createPopulation(10))
 # 			idx = i
 # 	return max,idx
 
-# def rouletteWheels(population):
-# 	sumFitness = 0
-# 	tmp =0
-# 	countFitness = 0
-# 	for i in population:		
-# 		x1 = decodeChromosome(-3,3,i,0,8)
-# 		x2 = decodeChromosome(-2,2,i,8,16)	
-# 		sumFitness += getFitness(x1,x2)
-	
-# 	randomNumber = random.random()
-
-# 	for i in population:
-# 		x1 = decodeChromosome(-3,3,i,0,8)
-# 		x2 = decodeChromosome(-2,2,i,8,16)
-# 		countFitness += getFitness(x1,x2)
-# 		if countFitness/sumFitness > randomNumber:
-# 			return i
-# 			break
 
 # def mate(parent1,parent2):
 # 	cp = random.randint(1,8)
