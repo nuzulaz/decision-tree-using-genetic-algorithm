@@ -4,7 +4,7 @@ import csv
 import itertools
 from itertools import permutations   
 from itertools import combinations 
-import collections 
+import collections
 
 def readTrainingData():
     results = []
@@ -18,7 +18,7 @@ def readTrainingData():
 def setRangeKromosom():
 	tmp = []
 	arrKromosom = []
-	for i in range(1,100):
+	for i in range(1,75):
 		if i % 15 == 0:
 			tmp.append(i)
 	return tmp
@@ -27,8 +27,7 @@ def createChromosome(arr):
 	ruleRange = random.choice(arr)
 	arrKromosom = []
 	for i in range(1,ruleRange+1):
-		arrKromosom.append(random.randint(0,1))		
-	print(len(arrKromosom))
+		arrKromosom.append(random.randint(0,1))	
 	return arrKromosom
 	
 def createPopulation(N):
@@ -39,115 +38,167 @@ def createPopulation(N):
 
 def splitRule(arrKromosom):
     for i in range(0, len(arrKromosom),15):
-        yield arrKromosom[i:i+15]
-
-def rSubset(arr, r): 
-    return list(combinations(arr, r)) 
+        yield arrKromosom[i:i+15] 
 
 def decodeChromosome(chromosome):
-	# rule = list(splitRule(chromosome))
-	dataUji = readTrainingData()
-	# for i in rule:
+	tmp = []
 	suhu = chromosome[0:3]
 	waktu = chromosome[3:7]
 	langit = chromosome[7:11]
 	lembap = chromosome[11:14]
 	status = chromosome[14]
+
 	cekSL = (list(itertools.product([1, 0], repeat=3)))
 	cekWL = (list(itertools.product([1, 0], repeat=4)))
-	x = 0
-	for i in cekWL:
-		print(x,i)
-		x+=1
-		
+
 
 	if suhu == list(cekSL[0]):
-		print("n t r")
+		tmp.append("Normal,Tinggi,Rendah")
 	elif suhu == list(cekSL[1]):
-		print("n t")
+		tmp.append("Normal,Tinggi")
 	elif suhu == list(cekSL[2]):
-		print("t r")
+		tmp.append("Tinggi,Rendah")
 	elif suhu == list(cekSL[3]):
-		print("t")
+		tmp.append("Tinggi")
 	elif suhu == list(cekSL[4]):
-		print("n r")
+		tmp.append("Normal,Rendah")
 	elif suhu == list(cekSL[5]):
-		print("n")
+		tmp.append("Normal")
 	elif suhu == list(cekSL[6]):
-		print("r")
+		tmp.append("Rendah")
+	elif suhu == list(cekSL[7]):
+		tmp.append("Rendah")
 
-	
 
 	if waktu == list(cekWL[0]):
-		print("p si so m")
+		tmp.append("Pagi,Siang,Sore,Malam")
 	elif waktu == list(cekWL[1]):
-		print("p si so")
+		tmp.append("Pagi,Siang,Sore")
 	elif waktu == list(cekWL[2]):
-		print("p si m")
+		tmp.append("Pagi,Siang,Malam")
 	elif waktu == list(cekWL[3]):
-		print("p si")
+		tmp.append("Pagi,Siang")
 	elif waktu == list(cekWL[4]):
-		print("p so m")
+		tmp.append("Pagi,Sore,Malam")
 	elif waktu == list(cekWL[5]):
-		print("p so")
+		tmp.append("Pagi,Sore")
 	elif waktu == list(cekWL[6]):
-		print("p m")	
+		tmp.append("Pagi,Malam")	
 	elif waktu == list(cekWL[7]):
-		print("p")
+		tmp.append("Pagi")
 	elif waktu == list(cekWL[8]):
-		print("si so m")
+		tmp.append("Siang,Sore,Malam")
 	elif waktu == list(cekWL[9]):
-		print("si so")
+		tmp.append("Siang,Sore")
 	elif waktu == list(cekWL[10]):
-		print("si m")
+		tmp.append("Siang,Malam")
 	elif waktu == list(cekWL[11]):
-		print("si")
-	elif waktu == list(cekSL[12]):
-		print("so m")
-	elif waktu == list(cekSL[13]):
-		print("so")
-	elif waktu == list(cekSL[14]):
-		print("m")
+		tmp.append("Siang")
+	elif waktu == list(cekWL[12]):
+		tmp.append("Sore,Malam")
+	elif waktu == list(cekWL[13]):
+		tmp.append("Sore")
+	elif waktu == list(cekWL[14]):
+		tmp.append("Malam")
+	elif waktu == list(cekWL[15]):
+		tmp.append("Pagi")		
 
-
+	if langit == list(cekWL[0]):
+		tmp.append("Berawan,Cerah,Hujan,Rintik")
+	elif langit == list(cekWL[1]):
+		tmp.append("Berawan,Cerah,Hujan")
+	elif langit == list(cekWL[2]):
+		tmp.append("Berawan,Cerah,Rintik")
+	elif langit == list(cekWL[3]):
+		tmp.append("Berawan,Cerah")
+	elif langit == list(cekWL[4]):
+		tmp.append("Berawan,Hujan,Rintik")
+	elif langit == list(cekWL[5]):
+		tmp.append("Berawan,Hujan")
+	elif langit == list(cekWL[6]):
+		tmp.append("Berawan,Rintik")	
+	elif langit == list(cekWL[7]):
+		tmp.append("Berawan")
+	elif langit == list(cekWL[8]):
+		tmp.append("Cerah,Hujan,Rintik")
+	elif langit == list(cekWL[9]):
+		tmp.append("Cerah,Hujan")
+	elif langit == list(cekWL[10]):
+		tmp.append("Cerah,Rintik")
+	elif langit == list(cekWL[11]):
+		tmp.append("Cerah")
+	elif langit == list(cekWL[12]):
+		tmp.append("Hujan,Rintik")
+	elif langit == list(cekWL[13]):
+		tmp.append("Hujan")
+	elif langit == list(cekWL[14]):
+		tmp.append("Rintik")
+	elif langit == list(cekWL[15]):
+		tmp.append("Berawan")
 
 	if lembap == list(cekSL[0]):
-		print("n t r")
+		tmp.append("Normal,Tinggi,Rendah")
 	elif lembap == list(cekSL[1]):
-		print("n t")
+		tmp.append("Normal,Tinggi")
 	elif lembap == list(cekSL[2]):
-		print("t r")
+		tmp.append("Tinggi,Rendah")
 	elif lembap == list(cekSL[3]):
-		print("t")
+		tmp.append("Tinggi")
 	elif lembap == list(cekSL[4]):
-		print("n r")
+		tmp.append("Normal,Rendah")
 	elif lembap == list(cekSL[5]):
-		print("n")
+		tmp.append("Normal")
 	elif lembap == list(cekSL[6]):
-		print("r")
+		tmp.append("Rendah")
+	elif lembap == list(cekSL[7]):
+		tmp.append("Rendah")
 
+	# print(chromosome[14])
+	if (status == [1]):
+		tmp.append("Ya")
+	else:
+		tmp.append("Tidak")
 
-	
+	# print(tmp,chromosome)
+	return tmp
 
-
-
-
-
-krom = [0,1,1,0,0,0,1,0,1,0,1,0,1,0,0]
-decodeChromosome(krom)
-
-def cekFitness(population):
-	dataUji = readTrainingData() 
+def cekFitness(population,dataUji):
 	fit = 0
+	tmp = 0
+	count = 0
+	listFitness = []
 	for i in range(0,len(population)):
 		rule = list(splitRule(population[i]))
 		for dataValid in rule:
+			cekStatus = decodeChromosome(dataValid)
+			s = cekStatus[0].split(",")
+			w = cekStatus[1].split(",")
+			l = cekStatus[2].split(",")
+			k = cekStatus[3].split(",")
+			status = cekStatus[4]
 			for data in dataUji:
-				if len(data) == len(dataValid) and len(data) == sum([1 for k, l in zip(data, dataValid) if k == l]): 
-					fit+=1
-				else: 
-					pass
-		listFitness.append((fit/80)*0.01)
+				for i in s:
+					if i == data[0]:
+						count += 1
+						break
+				for i in w:
+					if i == data[1]:
+						count += 1
+						break
+				for i in l:
+					if i == data[2]:
+						count += 1
+						break
+				for i in k:
+					if i == data[3]:
+						count += 1
+						break
+				if status == data[4]:
+						count += 1
+				if count == 5:
+					fit += 1
+				count = 0
+		listFitness.append(fit)
 		fit = 0
 
 	return listFitness
@@ -164,186 +215,138 @@ def rouletteWheels(Fitness):
 			break
 		idx+=1
 
-def crossOver(parent1,parent2):
-	prx = []
-	if len(parent1) >= len(parent2):
-		prx = parent2
-		anak1 = parent1
-		anak2 = parent2
-	else:
-		prx = parent1
-		anak1 = parent2
-		anak2 = parent1		
+def crossOverNew(parent1,parent2):
+	arr = []
+	while len(arr)==0:
+		tipot1a  = random.randint(1,len(parent1)-2)
+		tipot1b = random.randint(tipot1a+1,len(parent1)-1)
+		tp1 = [tipot1a,tipot1b]
+		pc1 = tipot1a % 15	
+		pc2 = tipot1b % 15	
+		# print(tp1,pc1,pc2)
+		jumlahAturan = len(parent2) // 15
+		for i in range(jumlahAturan):
+			for j in range(i,jumlahAturan):
+				x = i *15 + pc1		
+				y = j *15 + pc2
+				if (x > y):
+					continue
+				arr.append([x,y])
+	tp2 = random.choice(arr)
+	anak1 = (parent1[:tp1[0]]+parent2[tp2[0]:tp2[1]]+parent1[tp1[1]:])
+	anak2 = (parent2[:tp2[0]]+parent1[tp1[0]:tp1[1]]+parent2[tp2[1]:])
+	anak = [anak1,anak2]
+	return anak
+
+def mutate(child):
+	for i in range(0,len(child)):
+		prob = random.random()
+		if prob<0.5:
+			child[i] = random.randint(0,1)
+	# print(prob)
+	return child
+
+def fitnessTerbaik(listFitness):
+	x = max(listFitness)
+	for i in range(len(listFitness)):
+		if (listFitness[i]==x):
+			return i
+
+def cekFitnessKromosom(kromosom):
+	dataUji = readTrainingData() 
+	fit = 0
+	tmp = 0
+	count = 0
+	listFitness = []
+	cekStatus = kromosom
+	s = cekStatus[0].split(",")
+	w = cekStatus[1].split(",")
+	l = cekStatus[2].split(",")
+	k = cekStatus[3].split(",")
+	status = cekStatus[4]
+	for data in dataUji:
+		for i in s:
+			if i == data[0]:
+				count += 1
+				break
+		for i in w:
+			if i == data[1]:
+				count += 1
+				break
+		for i in l:
+			if i == data[2]:
+				count += 1
+				break
+		for i in k:
+			if i == data[3]:
+				count += 1
+				break
+		if status == data[4]:
+				count += 1
+		if count == 5:
+			fit += 1
+		count = 0
 	
-	print("===")
-	print(parent1,len(parent1))
-	print(parent2,len(parent2))
-	print("===")
+	listFitness.append(fit)
+	fit = 0
 
-	tipot1a  = random.randint(1,len(prx)-2)
-	tipot1b = random.randint(tipot1a+1,len(prx)-1)
-	p1 = [tipot1a,tipot1b]
-	jmlgen = p1[1]-p1[0]
-	gap = jmlgen % 5
-	pc1,pc2,pc3,pc4 = [tipot1a,tipot1a+jmlgen],[tipot1a,tipot1a+gap],[tipot1b-jmlgen,tipot1b],[tipot1b-gap,tipot1b]
-	
-	if pc1 == pc2 == pc3 == pc4:
-		arrProb = [pc1]
-	else:
-		arrProb = [pc1,pc2,pc3,pc4]
+	return listFitness
 
-	p2 = random.choice(arrProb)
-	print(p1,p2)
-	print(p2[1]-p2[0])
-	print(p2[0] % 5)
-	if p1 == p2:
-		tmp = anak1[p1[0]:p1[1]]
-		anak1[p1[0]:p1[1]] = anak2[p1[0]:p1[1]]
-		anak2[p1[0]:p1[1]] = tmp
+def elitism(listFitness):
+	bestLokal = fitnessTerbaik(listFitness)
+	return bestLokal
 
-	elif((p2[0] % 5 == 0) or ((p2[0] % 5 != 0) and (p2[1]-p2[0] > 2))): 	#rule lebih dari 1			
-		x =p1[1]-p1[0]
-		
-		if (p2[1]-p2[0] > 5):
-			while x % 5 != 0:
-				print(x)
-				x-+1
-
-
-		arr = [[] for _ in range(len(anak2)+x)]
-		print(arr,len(arr))
-		pass
-
-	else: #cuman 1 rule
-		pass
-
-
-# if __name__ == '__main__':
-# 	listFitness = []
-# 	population = createPopulation(10)
-# 	print(population)
-	# x = cekFitness(population)
-	# idx = 0
+if __name__ == '__main__':
+	dataUji = readTrainingData() 
+	listFitness = []
+	population = createPopulation(10)
+	listFitness = cekFitness(population,dataUji)
+	generasi = 0
+	idx = 0
 	# for i in population:
-	# 	print(i," = ",x[idx])
+	# 	print(i,listFitness[idx])
+	# 	idx +=1
+	# print("=========")
+	while generasi < 100:
+		newPop,newFit = [],[]
+		generasi += 1
+		for i in range(0,4):
+			parent1 = rouletteWheels(listFitness)
+			parent2 = rouletteWheels(listFitness)
+			anak = crossOverNew(parent1,parent2)
+#			================================ 	
+			for gen in anak:
+				gen = mutate(gen)
+				newPop.append(gen)
+				# print(gen,len(gen))
+
+			print(newPop)
+			# newFit = cekFitness(newPop,dataUji)
+			break
+# 			=================================
+			bestLokal = elitism(listFitness)
+			newFit.append(listFitness[bestLokal])
+			newPop.append(population[bestLokal])
+			population = newPop
+			listFitness = newFit
+			# print(population[bestLokal],listFitness[bestLokal])
+		generasi+=1
+		break
+		# bestLokal = elitism(listFitness)
+		# newFit
+# 	idx = 0
+	# for i in population:
+	# 	print(i,listFitness[idx])
 	# 	idx+=1
-
-	# parent1 = rouletteWheels(listFitness)
-	# parent2 = rouletteWheels(listFitness)
-	# crossOver(parent1,parent2)
-
-# print(createPopulation(10))
-# splitRule()
-def encodeTrainingData(training):	
-	# data[0] = suhu, data[1] = waktu, data[2] = langit, data[3] = kelembapan, data[4] = terbang
-	dataTrain = []
-	for data in training:	
-		suhu,waktu,langit,lembap,status = "","","","",""
-		if (data[0] == "Rendah"):
-			suhu = "001"		
-		elif (data[0] == "Normal"):		
-			suhu = "010"		
-		elif (data[0] == "Tinggi"):		
-			suhu = "100"
-
-		if (data[1] == "Pagi"):
-			waktu = "1000"		
-		elif (data[1] == "Siang"):		
-			waktu = "0100"		
-		elif (data[1] == "Sore"):		
-			waktu = "0010"	
-		elif (data[1] == "Malam"):		
-			waktu = "0001"
-
-		if (data[2] == "Berawan"):
-			langit = "1000"		
-		elif (data[2] == "Cerah"):		
-			langit = "0100"		
-		elif (data[2] == "Hujan"):		
-			langit = "0010"	
-		elif (data[2] == "Rintik"):		
-			langit = "0001"
-
-		if (data[3] == "Rendah"):
-			lembap = "001"		
-		elif (data[3] == "Normal"):		
-			lembap = "010"		
-		elif (data[3] == "Tinggi"):		
-			lembap = "100"
-
-		if data[4] == "Ya":
-			terbang = "1"
-		else:
-			terbang = "0"
-
-		genTraining = suhu+waktu+langit+lembap+terbang
-		dataTrain.append(genTraining)
-
-	del dataTrain[0]
-	return dataTrain
+	# print(anak[0])
+	# # print(offspring1)
+	# arr =  [0, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, 0, 1]
+	# arr1 = [0, 1, 1, 0, 0, 1, 1, 1, 0, 0, 1, 0, 1, 0, 0]
+	# print(decodeChromosome(arr1))
+	# print(cekFitnessKromosom(decodeChromosome(arr1)))
 
 
-# def bestFitness(population):
-# 	max = 0
-# 	idx = -1
-# 	for i in population:
-# 		x1 = decodeChromosome(-3,3,i,0,8)
-# 		x2 = decodeChromosome(-2,2,i,8,16)
-# 		cek = getFitness(x1,x2)
-# 		if cek>max:
-# 			max = cek
-# 			idx = i
-# 	return max,idx
-
-# def mutate(child):
-# 	for i in range(0,len(child)):
-# 		prob = random.random()
-# 		if prob<0.5:
-# 			child[i] = random.randint(0,9)
-# 	return child
-
-# def elitism(population):
-# 	bestLokal = []
-# 	bestLokal = bestFitness(population)
-# 	return bestLokal
-
-# #WORK 
-# population,child= [],[]
-# population = createPopulation(16,10)
-# generasi = 1
-# variansiFitnes = 0
-# stagnantCek = [True,0,0]
-# while (generasi <= 10000) and (stagnantCek[0]):
-# 	newPop = []
-# 	for i in range(0,4):
-# 		parent1 = rouletteWheels(population)
-# 		parent2 = rouletteWheels(population)
-# 		child = mate(parent1,parent2)
-# 		for gen in child:
-# 			gen = mutate(gen)
-# 			newPop.append(gen)
-	
-# 	bestLokal = elitism(population)
-# 	newPop.append(bestLokal[1])
-# 	population = newPop
-
-# 	if stagnantCek[1] == bestLokal[0]:
-# 		stagnantCek[2]+=1
-# 		if stagnantCek[2] >= 500:
-# 			stagnantCek[0] = False
-# 	else:
-# 		stagnantCek[1] = bestLokal[0]
-# 		stagnantCek[2] = 0
-# 		variansiFitnes += 1
-
-# 	generasi+=1
 
 
-# x1 = decodeChromosome(-3,3,bestLokal[1],0,8)
-# x2 = decodeChromosome(-2,2,bestLokal[1],8,16)
-# print("Nilai Terkecil : ",cekNilai(x1,x2))
-# print("Fenotype :",x1,x2)
-# print("Gen :",bestLokal[1])
-# print("Fitness :,",bestLokal[0])
-# print("Variansi Fitness :",variansiFitnes)
-# print("Total Generasi :",generasi)
+
+

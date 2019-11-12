@@ -127,64 +127,16 @@ if __name__ == '__main__':
 	population = createPopulation(10)
 	x = cekFitness(population)
 	idx = 0
-	# for i in population:
-	# 	print(i," = ",x[idx])
+	for i in population:
+		print(i," = ",x[idx])
 	# 	idx+=1
 
-	parent1 = rouletteWheels(listFitness)
-	parent2 = rouletteWheels(listFitness)
-	crossOver(parent1,parent2)
+	# parent1 = rouletteWheels(listFitness)
+	# parent2 = rouletteWheels(listFitness)
+	# crossOver(parent1,parent2)
 
 # print(createPopulation(10))
 # splitRule()
-# def encodeTrainingData(training):	
-# 	# data[0] = suhu, data[1] = waktu, data[2] = langit, data[3] = kelembapan, data[4] = terbang
-# 	dataTrain = []
-# 	for data in training:	
-# 		suhu,waktu,langit,lembap,status = "","","","",""
-# 		if (data[0] == "Rendah"):
-# 			suhu = "001"		
-# 		elif (data[0] == "Normal"):		
-# 			suhu = "010"		
-# 		elif (data[0] == "Tinggi"):		
-# 			suhu = "100"
-
-# 		if (data[1] == "Pagi"):
-# 			waktu = "1000"		
-# 		elif (data[1] == "Siang"):		
-# 			waktu = "0100"		
-# 		elif (data[1] == "Sore"):		
-# 			waktu = "0010"	
-# 		elif (data[1] == "Malam"):		
-# 			waktu = "0001"
-
-# 		if (data[2] == "Berawan"):
-# 			langit = "1000"		
-# 		elif (data[2] == "Cerah"):		
-# 			langit = "0100"		
-# 		elif (data[2] == "Hujan"):		
-# 			langit = "0010"	
-# 		elif (data[2] == "Rintik"):		
-# 			langit = "0001"
-
-# 		if (data[3] == "Rendah"):
-# 			lembap = "001"		
-# 		elif (data[3] == "Normal"):		
-# 			lembap = "010"		
-# 		elif (data[3] == "Tinggi"):		
-# 			lembap = "100"
-
-# 		if data[4] == "Ya":
-# 			terbang = "1"
-# 		else:
-# 			terbang = "0"
-
-# 		genTraining = suhu+waktu+langit+lembap+terbang
-# 		dataTrain.append(genTraining)
-
-# 	del dataTrain[0]
-# 	return dataTrain
-
 
 # def bestFitness(population):
 # 	max = 0
