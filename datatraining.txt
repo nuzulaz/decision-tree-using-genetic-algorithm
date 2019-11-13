@@ -1,4 +1,4 @@
-Suhu,Waktu,Kondisi Langit,Kelembapan,Terbang
+Suhu,Waktu,Kondisi,Langit,Kelembapan,Terbang
 Normal,Siang,Berawan,Normal,Tidak
 Normal,Siang,Cerah,Normal,Tidak
 Normal,Pagi,Hujan,Normal,Tidak
