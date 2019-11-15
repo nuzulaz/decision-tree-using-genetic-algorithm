@@ -295,36 +295,33 @@ if __name__ == '__main__':
 			print(listFitness[bestLokal])
 			break
 		
-	for i in population:
-		print(len(i)/15,listFitness[idx],i)
-		idx+=1
+	# for i in population:
+	# 	print(len(i)/15,listFitness[idx],i)
+	# 	idx+=1
 
 
 	idxBest = fitnessTerbaik(listFitness)
-
-	arr = {
-		"suhu" : [],
-		"waktu" : [],
-		"langit" : [],
-		"kelembapan" : [],
-		"status" : []
-	}
-
+	print(listFitness[idxBest])
 	ruleKrom = list(splitRule(population[idxBest]))
-	idx = 0
+
+	dataKrom = []
 	for i in ruleKrom:
 		x = decodeChromosome(i)
+		idx = 0
 		if x != ['S','S','S','S','S']:
-			arr["suhu"].append(x[0])
-			arr["waktu"].append(x[1])
-			arr["langit"].append(x[2])
-			arr["kelembapan"].append(x[3])
-			arr["status"].append(x[4])
-			idx +=1
-	
-	for i in range(idx):
-		print(arr["suhu"][i],arr["waktu"][i],arr["langit"][i],arr["kelembapan"][i],arr["status"][i])
+			dataKrom.append(x)
 
+
+	
+	# cek = 0
+	# for i in range(len(dataKrom)):
+	# 	for rule in dataKrom:
+	# 		if dataKrom[i] == rule:
+	# 			cek +=1
+	# 	print(cek)
+	# 	cek = 0	
+	# for data in dataUji:
+	
 
 
 
