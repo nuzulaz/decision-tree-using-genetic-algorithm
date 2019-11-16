@@ -158,8 +158,6 @@ def decodeChromosome(chromosome):
 		elif lembap == list(cekSL[7]):
 			tmp.append("Rendah")
 
-		# print(chromosome[14])
-		# print(status)
 		if (status == 1):
 			tmp.append("Ya")
 		else:
@@ -173,33 +171,32 @@ def cekFitness(population,dataUji):
 	count = 0
 	listFitness = []
 	for kromosom in population:
-		fit = 0
 		dataRule =  list(splitRule(kromosom))
+		fit = 0
 		for data in dataUji:
 			for drule in dataRule:
 				cekStatus = decodeChromosome(drule)
+				sh,wk,ln,kl,sts = False,False,False,False,False
 				s = cekStatus[0].split(",")
 				w = cekStatus[1].split(",")
 				l = cekStatus[2].split(",")
 				k = cekStatus[3].split(",")		
 				status = cekStatus[4]
+				
 				if data[0] in s:
-					count += 1
+					sh = True
 				if data[1] in w:
-					count += 1
+					wk = True
 				if data[2] in l:
-					count += 1
+					ln = True
 				if data[3] in k:
-					count += 1
-				if data[4] in status:
-					count+=1
-
-				if count == 5:
+					kl = True
+				if status == data[4]:
+					sts = True
+				 
+				if sh and wk and ln and kl and sts:
 					fit += 1
-					count = 0				
 					break
-				else:
-					count = 0			
 
 		fitness = fit/80
 		listFitness.append(fitness)
@@ -219,21 +216,24 @@ def rouletteWheels(Fitness):
 
 def crossOverNew(parent1,parent2):
 	arr = []
-	while len(arr)==0:
-		tipot1a  = random.randint(1,len(parent1)-2)
-		tipot1b = random.randint(tipot1a+1,len(parent1)-1)
-		tp1 = [tipot1a,tipot1b]
-		pc1 = tipot1a % 15	
-		pc2 = tipot1b % 15	
-		jumlahAturan = len(parent2) // 15
-		for i in range(jumlahAturan):
-			for j in range(i,jumlahAturan):
-				x = i *15 + pc1		
-				y = j *15 + pc2
-				if (x > y):
-					break
-				arr.append([x,y])
-	
+	jumlahAturan = len(parent2) // 15
+	for x in range(0,len(parent2)):
+		if len(arr)==0:
+			tipot1a  = random.randint(1,len(parent1)-2)
+			tipot1b = random.randint(tipot1a+1,len(parent1)-1)
+			tp1 = [tipot1a,tipot1b]
+			pc1 = tipot1a % 15	
+			pc2 = tipot1b % 15	
+			for i in range(jumlahAturan):
+				for j in range(i,jumlahAturan):
+					x = i *15 + pc1		
+					y = j *15 + pc2
+					if (x > y):
+						break
+					arr.append([x,y])
+		else:
+			break
+			
 	tp2 = random.choice(arr)
 	anak1 = (parent1[:tp1[0]]+parent2[tp2[0]:tp2[1]]+parent1[tp1[1]:])
 	anak2 = (parent2[:tp2[0]]+parent1[tp1[0]:tp1[1]]+parent2[tp2[1]:])
@@ -253,9 +253,58 @@ def fitnessTerbaik(listFitness):
 		if (listFitness[i]==x):
 			return i
 
+def readDataUji():
+    results = []
+    with open("data_uji_opsi_1.csv") as csvfile:
+        reader = csv.reader(csvfile)
+        for row in reader:
+            results.append(row)
+    results.remove(results[0])
+    return results
+
 def elitism(listFitness):
 	bestLokal = fitnessTerbaik(listFitness)
 	return bestLokal
+
+def hasilTxt(decodeFix,dataUji):
+	listHasil=[]
+	for data in dataUji:
+		count = 0
+		for rule in decodeFix:
+			sh,wk,ln,kl,sts = False,False,False,False,False
+			s = rule[0].split(",")
+			w = rule[1].split(",")
+			l = rule[2].split(",")
+			k = rule[3].split(",")		
+			
+			print(s,w,l,k)			
+			if data[0] in s:
+				sh = True
+			if data[1] in w:
+				wk = True
+			if data[2] in l:
+				ln = True
+			if data[3] in k:
+				kl = True
+			 
+			if sh and wk and ln and kl:
+				count += 1 
+				listHasil.append(rule[4])
+				break
+		
+		if count == 0:
+			print("q")
+			listHasil.append("Ya")
+
+	return listHasil
+			
+def tulisData(listHasil):
+	f = open("hasil.txt","w+")
+	for i in range(19):
+		f.write(listHasil[i]+"\r\n")
+	f.close()
+    
+
 
 if __name__ == '__main__':
 	dataUji = readTrainingData() 
@@ -268,7 +317,7 @@ if __name__ == '__main__':
 	print("==============================================")
 
 
-	for i in tqdm(range(50)):
+	for i in tqdm(range(100)):
 		newPop,newFit = [],[]
 		for i in (range(0,4)):
 			parent1 = rouletteWheels(listFitness)
@@ -294,35 +343,21 @@ if __name__ == '__main__':
 		if (listFitness[bestLokal] == 1) or (len(population[bestLokal])/15 >= 50):
 			print(listFitness[bestLokal])
 			break
-		
-	# for i in population:
-	# 	print(len(i)/15,listFitness[idx],i)
-	# 	idx+=1
 
-
+	z = readDataUji()
 	idxBest = fitnessTerbaik(listFitness)
-	print(listFitness[idxBest])
 	ruleKrom = list(splitRule(population[idxBest]))
+	decodeBest,decodeFix = [],[]
 
-	dataKrom = []
-	for i in ruleKrom:
-		x = decodeChromosome(i)
-		idx = 0
-		if x != ['S','S','S','S','S']:
-			dataKrom.append(x)
+	for rule in ruleKrom:
+		decodeBest.append(decodeChromosome(rule))
 
-
+	for i in decodeBest:
+		if i != ['S','S','S','S','S']:
+			decodeFix.append(i)
+		# for data in dataUji:
 	
-	# cek = 0
-	# for i in range(len(dataKrom)):
-	# 	for rule in dataKrom:
-	# 		if dataKrom[i] == rule:
-	# 			cek +=1
-	# 	print(cek)
-	# 	cek = 0	
-	# for data in dataUji:
-	
-
+	tulisData(hasilTxt(decodeFix,z))
 
 
 
