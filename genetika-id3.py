@@ -4,7 +4,7 @@ import csv
 
 import collections 
 
-def readTrainingData():
+def dataLatih():
     results = []
     with open("data_latih_opsi_2.txt") as csvfile:
         reader = csv.reader(csvfile)
@@ -43,15 +43,15 @@ def createPopulation(N):
 		population.append(createChromosome(setRangeKromosom()))
 	return population
 
-def splitRule(arrKromosom):
+def splitAturan(arrKromosom):
     for i in range(0, len(arrKromosom),5):
         yield arrKromosom[i:i+5]
 
 def cekFitness(population):
-	dataUji = readTrainingData() 
+	dataUji = dataLatih() 
 	fit = 0
 	for i in range(0,len(population)):
-		rule = list(splitRule(population[i]))
+		rule = list(splitAturan(population[i]))
 		for dataValid in rule:
 			for data in dataUji:
 				if len(data) == len(dataValid) and len(data) == sum([1 for k, l in zip(data, dataValid) if k == l]): 
@@ -136,7 +136,7 @@ if __name__ == '__main__':
 	# crossOver(parent1,parent2)
 
 # print(createPopulation(10))
-# splitRule()
+# splitAturan()
 
 # def bestFitness(population):
 # 	max = 0

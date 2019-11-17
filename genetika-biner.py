@@ -9,7 +9,7 @@ import collections
 
 def readTrainingData():
     results = []
-    with open("datatraining.txt") as csvfile:
+    with open("data_latih_opsi_1.csv") as csvfile:
         reader = csv.reader(csvfile)
         for row in reader:
             results.append(row)
@@ -59,109 +59,109 @@ def decodeChromosome(chromosome):
 		tmp.append("S")
 	else:
 		if suhu == list(cekSL[0]):
-			tmp.append("Normal,Tinggi,Rendah")
+			tmp.append("normal,tinggi,rendah")
 		elif suhu == list(cekSL[1]):
-			tmp.append("Normal,Tinggi")
+			tmp.append("normal,tinggi")
 		elif suhu == list(cekSL[2]):
-			tmp.append("Tinggi,Rendah")
+			tmp.append("tinggi,rendah")
 		elif suhu == list(cekSL[3]):
-			tmp.append("Tinggi")
+			tmp.append("tinggi")
 		elif suhu == list(cekSL[4]):
-			tmp.append("Normal,Rendah")
+			tmp.append("normal,rendah")
 		elif suhu == list(cekSL[5]):
-			tmp.append("Normal")
+			tmp.append("normal")
 		elif suhu == list(cekSL[6]):
-			tmp.append("Rendah")
+			tmp.append("rendah")
 		elif suhu == list(cekSL[7]):
-			tmp.append("Rendah")
+			tmp.append("rendah")
 
 		if waktu == list(cekWL[0]):
-			tmp.append("Pagi,Siang,Sore,Malam")
+			tmp.append("pagi,siang,sore,malam")
 		elif waktu == list(cekWL[1]):
-			tmp.append("Pagi,Siang,Sore")
+			tmp.append("pagi,siang,sore")
 		elif waktu == list(cekWL[2]):
-			tmp.append("Pagi,Siang,Malam")
+			tmp.append("pagi,siang,malam")
 		elif waktu == list(cekWL[3]):
-			tmp.append("Pagi,Siang")
+			tmp.append("pagi,siang")
 		elif waktu == list(cekWL[4]):
-			tmp.append("Pagi,Sore,Malam")
+			tmp.append("pagi,sore,malam")
 		elif waktu == list(cekWL[5]):
-			tmp.append("Pagi,Sore")
+			tmp.append("pagi,sore")
 		elif waktu == list(cekWL[6]):
-			tmp.append("Pagi,Malam")	
+			tmp.append("pagi,malam")	
 		elif waktu == list(cekWL[7]):
-			tmp.append("Pagi")
+			tmp.append("pagi")
 		elif waktu == list(cekWL[8]):
-			tmp.append("Siang,Sore,Malam")
+			tmp.append("siang,sore,malam")
 		elif waktu == list(cekWL[9]):
-			tmp.append("Siang,Sore")
+			tmp.append("siang,sore")
 		elif waktu == list(cekWL[10]):
-			tmp.append("Siang,Malam")
+			tmp.append("siang,malam")
 		elif waktu == list(cekWL[11]):
-			tmp.append("Siang")
+			tmp.append("siang")
 		elif waktu == list(cekWL[12]):
-			tmp.append("Sore,Malam")
+			tmp.append("sore,malam")
 		elif waktu == list(cekWL[13]):
-			tmp.append("Sore")
+			tmp.append("sore")
 		elif waktu == list(cekWL[14]):
-			tmp.append("Malam")
+			tmp.append("malam")
 		elif waktu == list(cekWL[15]):
-			tmp.append("Pagi")		
+			tmp.append("pagi")		
 
 		if langit == list(cekWL[0]):
-			tmp.append("Berawan,Cerah,Hujan,Rintik")
+			tmp.append("berawan,cerah,hujan,rintik")
 		elif langit == list(cekWL[1]):
-			tmp.append("Berawan,Cerah,Hujan")
+			tmp.append("berawan,cerah,hujan")
 		elif langit == list(cekWL[2]):
-			tmp.append("Berawan,Cerah,Rintik")
+			tmp.append("berawan,cerah,rintik")
 		elif langit == list(cekWL[3]):
-			tmp.append("Berawan,Cerah")
+			tmp.append("berawan,cerah")
 		elif langit == list(cekWL[4]):
-			tmp.append("Berawan,Hujan,Rintik")
+			tmp.append("berawan,hujan,rintik")
 		elif langit == list(cekWL[5]):
-			tmp.append("Berawan,Hujan")
+			tmp.append("berawan,hujan")
 		elif langit == list(cekWL[6]):
-			tmp.append("Berawan,Rintik")	
+			tmp.append("berawan,rintik")	
 		elif langit == list(cekWL[7]):
-			tmp.append("Berawan")
+			tmp.append("berawan")
 		elif langit == list(cekWL[8]):
-			tmp.append("Cerah,Hujan,Rintik")
+			tmp.append("cerah,hujan,rintik")
 		elif langit == list(cekWL[9]):
-			tmp.append("Cerah,Hujan")
+			tmp.append("cerah,hujan")
 		elif langit == list(cekWL[10]):
-			tmp.append("Cerah,Rintik")
+			tmp.append("cerah,rintik")
 		elif langit == list(cekWL[11]):
-			tmp.append("Cerah")
+			tmp.append("cerah")
 		elif langit == list(cekWL[12]):
-			tmp.append("Hujan,Rintik")
+			tmp.append("hujan,rintik")
 		elif langit == list(cekWL[13]):
-			tmp.append("Hujan")
+			tmp.append("hujan")
 		elif langit == list(cekWL[14]):
-			tmp.append("Rintik")
+			tmp.append("rintik")
 		elif langit == list(cekWL[15]):
-			tmp.append("Berawan")
+			tmp.append("berawan")
 
 		if lembap == list(cekSL[0]):
-			tmp.append("Normal,Tinggi,Rendah")
+			tmp.append("normal,tinggi,rendah")
 		elif lembap == list(cekSL[1]):
-			tmp.append("Normal,Tinggi")
+			tmp.append("normal,tinggi")
 		elif lembap == list(cekSL[2]):
-			tmp.append("Tinggi,Rendah")
+			tmp.append("tinggi,rendah")
 		elif lembap == list(cekSL[3]):
-			tmp.append("Tinggi")
+			tmp.append("tinggi")
 		elif lembap == list(cekSL[4]):
-			tmp.append("Normal,Rendah")
+			tmp.append("normal,rendah")
 		elif lembap == list(cekSL[5]):
-			tmp.append("Normal")
+			tmp.append("normal")
 		elif lembap == list(cekSL[6]):
-			tmp.append("Rendah")
+			tmp.append("rendah")
 		elif lembap == list(cekSL[7]):
-			tmp.append("Rendah")
+			tmp.append("rendah")
 
 		if (status == 1):
-			tmp.append("Ya")
+			tmp.append("ya")
 		else:
-			tmp.append("Tidak")
+			tmp.append("tidak")
 
 	# print(tmp,chromosome)
 	return tmp
@@ -202,15 +202,15 @@ def cekFitness(population,dataUji):
 		listFitness.append(fitness)
 	return listFitness
 
-def rouletteWheels(Fitness):
-	sumFitness = sum(Fitness)
-	countFitness = 0
+def rouletteWheels(FitnessPopulasi):
+	count = 0
+	totalSemuaFitness = sum(FitnessPopulasi)
 	randomNumber = random.random()
 	idx = 0
-	for i in population:
-		countFitness += Fitness[idx]
-		if countFitness/sumFitness > randomNumber:
-			return i
+	for individu in population:
+		count += FitnessPopulasi[idx]
+		if count/totalSemuaFitness > randomNumber:
+			return individu
 			break
 		idx+=1
 
@@ -258,8 +258,10 @@ def readDataUji():
     with open("data_uji_opsi_1.csv") as csvfile:
         reader = csv.reader(csvfile)
         for row in reader:
-            results.append(row)
-    results.remove(results[0])
+            tmp=[]
+            for i in row:
+            	tmp.append(i.lower())
+            results.append(tmp)
     return results
 
 def elitism(listFitness):
@@ -268,6 +270,7 @@ def elitism(listFitness):
 
 def hasilTxt(decodeFix,dataUji):
 	listHasil=[]
+	print(dataUji)
 	for data in dataUji:
 		count = 0
 		for rule in decodeFix:
@@ -294,13 +297,13 @@ def hasilTxt(decodeFix,dataUji):
 		
 		if count == 0:
 			print("q")
-			listHasil.append("Ya")
+			listHasil.append("ya")
 
 	return listHasil
 			
 def tulisData(listHasil):
 	f = open("hasil.txt","w+")
-	for i in range(19):
+	for i in range(20):
 		f.write(listHasil[i]+"\r\n")
 	f.close()
     
@@ -309,7 +312,7 @@ def tulisData(listHasil):
 if __name__ == '__main__':
 	dataUji = readTrainingData() 
 	listFitness = []
-	population = createPopulation(10)
+	population = createPopulation(20)
 	listFitness = cekFitness(population,dataUji)
 	generasi = 0
 	idx = 0
@@ -318,8 +321,9 @@ if __name__ == '__main__':
 
 
 	for i in tqdm(range(100)):
+		
 		newPop,newFit = [],[]
-		for i in (range(0,4)):
+		for i in (range(0,10)):
 			parent1 = rouletteWheels(listFitness)
 			parent2 = rouletteWheels(listFitness)
 			anak = crossOverNew(parent1,parent2)
@@ -329,7 +333,6 @@ if __name__ == '__main__':
 				newPop.append(gen)
 			
 			newFit = cekFitness(newPop,dataUji)
-			idx = 0
 			# for i in newPop:
 			# 	print(i,newFit[idx])
 			# 	idx+=1
@@ -352,11 +355,19 @@ if __name__ == '__main__':
 	for rule in ruleKrom:
 		decodeBest.append(decodeChromosome(rule))
 
+
 	for i in decodeBest:
 		if i != ['S','S','S','S','S']:
 			decodeFix.append(i)
-		# for data in dataUji:
-	
+
+
+	print("Kromosom Terbaik : ",population[idxBest])
+	print("Fitness : ",listFitness[idxBest])
+	print("Rule : ",decodeFix)
+
+	print("=====")
+	print(z)
+
 	tulisData(hasilTxt(decodeFix,z))
 
 
